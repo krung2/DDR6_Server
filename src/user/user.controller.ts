@@ -1,7 +1,11 @@
+import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
+import { Token } from './../libs/decorator/token.decorator';
+import { UserDto } from './user.dto';
 import User from 'src/entities/user';
 import { returnLib } from './../libs/return.lib';
 import { UserService } from './user.service';
-import { Body, Controller, Get, Query } from '@nestjs/common';
+import AuthGaurd from 'src/middleware/auth.middleware';
+import { IUser } from 'src/libs/interface/IUser';
 
 @Controller('user')
 export class UserController {
@@ -10,12 +14,24 @@ export class UserController {
     private readonly userService: UserService,
   ) { }
 
-  @Get('')
+  @Post()
+  @UseGuards(new AuthGaurd())
+  async addInfo(
+    @Token() tokenUser: IUser,
+    @Body() userDto: UserDto,
+  ) {
+
+    const user: User = await this.userService.addInfo(tokenUser, userDto);
+
+    return returnLib(201, '등록 성공', user);
+  }
+
+  @Get()
   async getInfo(
     @Query('uniqueId') uniqueId: string,
   ) {
 
-    const data: User = await this.userService.getInfo(uniqueId);
+    const data: User = await this.userService.getInfoCheck(uniqueId);
 
     return returnLib(200, '정보 가져오기 성공!', data);
   }

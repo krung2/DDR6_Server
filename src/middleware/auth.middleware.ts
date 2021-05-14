@@ -1,5 +1,4 @@
 import { SERVER } from './../config/dotenv';
-import { IResToken } from './../libs/interface/IUser';
 import { BadRequestException, CanActivate, ExecutionContext, GoneException, Injectable, InternalServerErrorException, Logger, UnauthorizedException } from "@nestjs/common";
 import axios from 'axios';
 
@@ -18,13 +17,13 @@ export default class AuthGaurd implements CanActivate {
     }
 
     try {
-      const user: IResToken = await axios.get(`${SERVER.OPENAPI}/user`, {
+      const { data } = await axios.get(`${SERVER.OPENAPI}/user`, {
         headers: {
           "access-token": token,
         },
       });
 
-      req.user = user;
+      req.user = data.data;
       return true;
     } catch (err) {
 

@@ -16,15 +16,6 @@ export default class User {
   })
   userName!: string;
 
-  @Column()
-  grade!: number;
-
-  @Column()
-  room!: number;
-
-  @Column()
-  number!: number;
-
   @Column({
     name: 'profile_image',
     type: 'text'
@@ -32,7 +23,7 @@ export default class User {
   profileImage!: string;
 
   @Column()
-  level!: string;
+  level!: number;
 
   @Column({
     type: 'text'
@@ -45,9 +36,9 @@ export default class User {
   rankImage!: string;
 
   @Column({
-    name: 'win_reate',
+    name: 'wl',
   })
-  winRate!: string;
+  wl!: string;
 
   @Column()
   wins!: number;
