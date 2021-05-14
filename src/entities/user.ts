@@ -4,9 +4,9 @@ import { Column, Entity, PrimaryColumn } from "typeorm";
 export default class User {
 
   @PrimaryColumn({
-    name: 'member_idx',
+    name: 'unique_id',
   })
-  memberIdx!: string;
+  uniqueId!: string;
 
   @Column()
   generation!: string;
@@ -15,6 +15,15 @@ export default class User {
     name: 'user_name',
   })
   userName!: string;
+
+  @Column()
+  grade!: number;
+
+  @Column()
+  room!: number;
+
+  @Column()
+  number!: number;
 
   @Column({
     name: 'profile_image',

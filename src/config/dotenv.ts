@@ -24,3 +24,8 @@ export const DATABASE_CONFIG = {
 };
 
 export const API_KEY = getValue('API_KEY');
+
+export const SERVER = {
+  DAUTH: getValue('SERVER_DAUTH'),
+  OPENAPI: getValue('SERVER_OPENAPI'),
+}
