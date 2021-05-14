@@ -29,3 +29,8 @@ export const SERVER = {
   DAUTH: getValue('SERVER_DAUTH'),
   OPENAPI: getValue('SERVER_OPENAPI'),
 }
+
+export const CLIENT = {
+  ID: getValue('CLIENT_ID'),
+  SECRET: getValue('CLIENT_SECRET'),
+}
