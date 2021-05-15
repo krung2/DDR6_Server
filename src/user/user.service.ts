@@ -1,6 +1,6 @@
 import { API_KEY } from './../config/dotenv';
 import { IGeneric } from '../libs/interface/IGeneric';
-import { UserDto } from './user.dto';
+import { UserDto } from './dto/user.dto';
 import { ForbiddenException, InternalServerErrorException, UnauthorizedException } from '@nestjs/common';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -54,12 +54,13 @@ export class UserService {
 
     createUser.uniqueId = user.uniqueId;
     createUser.generation = userDto.generation;
-    createUser.userName = user.name;
+    createUser.name = user.name;
+    createUser.userName = userDto.userName;
     createUser.profileImage = genericData.avatar_url_256;
     createUser.level = genericData.progression.level;
     createUser.rank = seasonalData.seasons.crimson_heist.regions.apac[0].rank_text;
     createUser.rankImage = seasonalData.seasons.crimson_heist.regions.apac[0].rank_image;
-    createUser.wl = String(genericData.stats.general.wl);
+    createUser.wl = genericData.stats.general.wins / (genericData.stats.general.wins + genericData.stats.general.losses);
     createUser.wins = genericData.stats.general.wins;
     createUser.losses = genericData.stats.general.losses;
     createUser.kd = genericData.stats.general.kd;

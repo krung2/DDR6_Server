@@ -11,6 +11,9 @@ export default class User {
   @Column()
   generation!: string;
 
+  @Column()
+  name!: string;
+
   @Column({
     name: 'user_name',
   })
@@ -36,9 +39,9 @@ export default class User {
   rankImage!: string;
 
   @Column({
-    name: 'wl',
+    type: 'double'
   })
-  wl!: string;
+  wl!: number;
 
   @Column()
   wins!: number;

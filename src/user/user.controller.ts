@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
 import { Token } from './../libs/decorator/token.decorator';
-import { UserDto } from './user.dto';
+import { UserDto } from './dto/user.dto';
 import User from 'src/entities/user';
 import { returnLib } from './../libs/return.lib';
 import { UserService } from './user.service';
