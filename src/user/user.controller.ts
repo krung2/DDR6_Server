@@ -28,7 +28,6 @@ export class UserController {
   }
 
   @Post('not')
-  @UseGuards(new AuthGaurd())
   async addInfoNot(
     @Body() userDto: UserNotDto,
   ) {
