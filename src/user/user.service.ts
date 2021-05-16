@@ -96,6 +96,10 @@ export class UserService {
 
   async getAllInfo(): Promise<User[]> {
 
-    return this.userRepository.find();
+    return this.userRepository.find({
+      order: {
+        createdAt: 'ASC'
+      }
+    });
   }
 }
