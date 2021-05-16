@@ -17,7 +17,7 @@ export class TokenService {
 
       const { data } = await axios.post(`${SERVER.DAUTH}/token`, tokenData);
 
-      return data.data.data;
+      return data.data;
     } catch (err) {
 
       if (err.response !== undefined) {

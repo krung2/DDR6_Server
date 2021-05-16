@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
 
 @Entity('user')
 export default class User {
@@ -52,5 +52,10 @@ export default class User {
   @Column({
     type: 'double'
   })
-  kd!: number;
+  kd!: string;
+
+  @CreateDateColumn({
+    name: 'created_at'
+  })
+  createdAt: string;
 }

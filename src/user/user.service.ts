@@ -1,7 +1,7 @@
 import { API_KEY } from './../config/dotenv';
 import { IGeneric } from '../libs/interface/IGeneric';
 import { UserDto } from './dto/user.dto';
-import { ForbiddenException, InternalServerErrorException, UnauthorizedException } from '@nestjs/common';
+import { ForbiddenException, GoneException, InternalServerErrorException, UnauthorizedException } from '@nestjs/common';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import User from 'src/entities/user';
@@ -33,18 +33,19 @@ export class UserService {
     try {
       genericRes = await axios.get(`https://api2.r6stats.com/public-api/stats/${userDto.userName}/pc/generic`, {
         headers: {
-          Authorization: API_KEY
+          Authorization: `Bearer ${API_KEY}`,
         },
-      });
+      })
 
       seasonalRes = await axios.get(`https://api2.r6stats.com/public-api/stats/${userDto.userName}/pc/seasonal`, {
         headers: {
-          Authorization: API_KEY,
+          Authorization: `Bearer ${API_KEY}`,
         },
       });
+
     } catch (err) {
 
-      throw new InternalServerErrorException('잘못된 이름입니다');
+      throw new GoneException('잘못된 이름입니다');
     }
 
     const genericData: IGeneric = genericRes.data;
@@ -60,10 +61,10 @@ export class UserService {
     createUser.level = genericData.progression.level;
     createUser.rank = seasonalData.seasons.crimson_heist.regions.apac[0].rank_text;
     createUser.rankImage = seasonalData.seasons.crimson_heist.regions.apac[0].rank_image;
-    createUser.wl = genericData.stats.general.wins / (genericData.stats.general.wins + genericData.stats.general.losses);
+    createUser.wl = Math.floor((genericData.stats.general.wins / (genericData.stats.general.wins + genericData.stats.general.losses)) * 100);
     createUser.wins = genericData.stats.general.wins;
     createUser.losses = genericData.stats.general.losses;
-    createUser.kd = genericData.stats.general.kd;
+    createUser.kd = (genericData.stats.general.kd).toFixed(2);
 
     await this.userRepository.save(createUser);
 
