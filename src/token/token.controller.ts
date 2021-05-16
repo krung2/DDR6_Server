@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { BadRequestException, Controller, Get, Query } from '@nestjs/common';
 import { returnLib } from 'src/libs/return.lib';
 import { TokenService } from './token.service';
 
@@ -11,8 +11,13 @@ export class TokenController {
 
   @Get()
   async getToken(
-    @Query('code') code: string,
+    @Query('code') code?: string,
   ) {
+
+    if (code === undefined) {
+
+      throw new BadRequestException('code가 전송되지 않았습니다');
+    }
 
     const token = await this.tokenService.getToken(code);
 
