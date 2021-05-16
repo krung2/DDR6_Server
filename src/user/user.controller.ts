@@ -6,6 +6,7 @@ import { returnLib } from './../libs/return.lib';
 import { UserService } from './user.service';
 import AuthGaurd from 'src/middleware/auth.middleware';
 import { IUser } from 'src/libs/interface/IUser';
+import { UserNotDto } from './dto/userNot.dto';
 
 @Controller('user')
 export class UserController {
@@ -22,6 +23,17 @@ export class UserController {
   ) {
 
     const user: User = await this.userService.addInfo(tokenUser, userDto);
+
+    return returnLib(201, '등록 성공', user);
+  }
+
+  @Post('not')
+  @UseGuards(new AuthGaurd())
+  async addInfoNot(
+    @Body() userDto: UserNotDto,
+  ) {
+
+    const user: User = await this.userService.addInfoNot(userDto);
 
     return returnLib(201, '등록 성공', user);
   }
