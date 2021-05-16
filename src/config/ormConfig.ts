@@ -7,7 +7,7 @@ export const config = () => {
     type: 'mysql',
     ...DATABASE_CONFIG,
     entities,
-    synchronize: true,
+    synchronize: false,
   }
 
   return ORMconfig;

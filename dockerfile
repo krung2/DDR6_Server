@@ -3,7 +3,9 @@ WORKDIR /usr/src/DDR6
 
 COPY . .
 
-RUN npm install
-RUN npm run build
+RUN npm i yarn
 
-CMD ["npm", "run", "start:prod"]
+RUN yarn
+RUN yarn build
+
+CMD ["yarn", "start:prod"]
