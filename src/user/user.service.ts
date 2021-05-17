@@ -55,8 +55,6 @@ export class UserService {
 
     const createUser: User = await this.userRepository.create();
 
-    console.log(genericData.uplay_id)
-
     createUser.uniqueId = user.uniqueId;
     createUser.generation = userDto.generation;
     createUser.name = user.name;
