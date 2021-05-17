@@ -55,6 +55,8 @@ export class UserService {
 
     const createUser: User = await this.userRepository.create();
 
+    console.log(genericData.uplay_id)
+
     createUser.uniqueId = user.uniqueId;
     createUser.generation = userDto.generation;
     createUser.name = user.name;
@@ -67,7 +69,7 @@ export class UserService {
     createUser.wins = genericData.stats.general.wins;
     createUser.losses = genericData.stats.general.losses;
     createUser.kd = (genericData.stats.general.kd).toFixed(2);
-    createUser.uplayId = genericRes.uplay_id;
+    createUser.uplayId = genericData.uplay_id;
 
     await this.userRepository.save(createUser);
 
