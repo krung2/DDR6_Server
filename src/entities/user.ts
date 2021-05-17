@@ -8,7 +8,10 @@ export default class User {
   })
   uniqueId!: string;
 
-  @Column()
+  @Column({
+    name: 'uplay_id',
+    unique: true,
+  })
   uplayId: string;
 
   @Column()
