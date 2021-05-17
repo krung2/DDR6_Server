@@ -67,7 +67,7 @@ export class UserService {
     createUser.wins = genericData.stats.general.wins;
     createUser.losses = genericData.stats.general.losses;
     createUser.kd = (genericData.stats.general.kd).toFixed(2);
-    createUser.uplayId = genericRes.uplayId;
+    createUser.uplayId = genericRes.uplay_id;
 
     await this.userRepository.save(createUser);
 
