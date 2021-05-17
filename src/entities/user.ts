@@ -9,6 +9,9 @@ export default class User {
   uniqueId!: string;
 
   @Column()
+  uplayId: string;
+
+  @Column()
   generation!: string;
 
   @Column()
